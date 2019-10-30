@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ike's HTML Assessment</title>
+    </head>
+    <body>
+        <figure>
+            <img id="user-image">
+            <figcaption id="display-message"></figcaption>
+        </figure>
+        <form id="form">
+            <label for="file-upload">Choose an Image</label>
+            <input type="file" id="file-upload"><br>
+            <label for="input-message">Name</label>
+            <input type="text" id="input-message"><br>
+            <p>Size:</p>
+            <label><input type="radio" name="size" value="small"> Small</label><br>
+            <label><input type="radio" name="size" value="medium"> Medium</label><br>
+            <label><input type="radio" name="size" value="large"> Large</label><br>
+            <label><input type="checkbox" checked> Long Sleeves</label><br>
+            <input type="submit">
+        </form>
+
+        <script>
+            const fileUpload = document.getElementById('file-upload')
+            const userImage = document.getElementById('user-image')
+            const displayMessage = document.getElementById('display-message')
+            const inputMessage = document.getElementById('input-message')
+            const form = document.getElementById('form')
+
+            form.onsubmit = function(e) {
+                e.preventDefault()
+            }
+
+            inputMessage.oninput = function(e) {
+                console.log(e.target.value)
+                displayMessage.innerHTML = e.target.value
+            }
+
+            fileUpload.onchange = function(e) {
+                console.log(e.target.files)
+                const fr = new FileReader()
+                fr.onload = function(e) {
+                    userImage.src = e.target.result
+                }
+                fr.readAsDataURL(e.target.files[0])
+            }
+        </script>
+    </body>
+</html>
